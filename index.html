@@ -1,0 +1,1532 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SiteSpark - We build modern websites that bring customers to your business. Web design for cafes, restaurants, shops &amp; startups.">
+  <title>SiteSpark | Web Development Agency</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <style>
+    html, body { height: 100%; margin: 0; }
+    * { font-family: 'Outfit', sans-serif; scroll-behavior: smooth; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --text-primary: #ffffff;
+      --accent-blue: #00d4ff;
+      --accent-purple: #a855f7;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, #00d4ff 0%, #a855f7 50%, #00d4ff 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s linear infinite;
+    }
+    
+    @keyframes shimmer {
+      to { background-position: 200% center; }
+    }
+    
+    .glass-card {
+      background: rgba(18, 18, 26, 0.7);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(168, 85, 247, 0.2);
+    }
+    
+    .glass-card:hover {
+      border-color: rgba(0, 212, 255, 0.4);
+      box-shadow: 0 0 30px rgba(0, 212, 255, 0.1);
+    }
+    
+    .glow-blue { box-shadow: 0 0 30px rgba(0, 212, 255, 0.3); }
+    .glow-purple { box-shadow: 0 0 30px rgba(168, 85, 247, 0.3); }
+    
+    .spark {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #00d4ff;
+      border-radius: 50%;
+      animation: sparkle 2s ease-in-out infinite;
+    }
+    
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0); }
+      50% { opacity: 1; transform: scale(1); }
+    }
+    
+    .grid-bg {
+      background-image: 
+        linear-gradient(rgba(168, 85, 247, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(168, 85, 247, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+    
+    .hero-gradient {
+      background: radial-gradient(ellipse at 50% 0%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+                  radial-gradient(ellipse at 80% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 40%),
+                  radial-gradient(ellipse at 20% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 40%);
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #00d4ff 0%, #a855f7 100%);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 40px rgba(0, 212, 255, 0.4);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid rgba(0, 212, 255, 0.5);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-secondary:hover {
+      background: rgba(0, 212, 255, 0.1);
+      border-color: #00d4ff;
+    }
+    
+    .floating-btn {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease-out;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .nav-scrolled {
+      background: rgba(10, 10, 15, 0.95) !important;
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+    }
+    
+    .wireframe-element {
+      border: 1px dashed rgba(0, 212, 255, 0.3);
+      border-radius: 8px;
+    }
+    
+    .code-bracket {
+      color: #00d4ff;
+      font-family: 'JetBrains Mono', monospace;
+      opacity: 0.6;
+    }
+    
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #00d4ff !important;
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+    }
+    
+    .service-icon {
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%);
+    }
+    
+    .testimonial-card {
+      background: linear-gradient(135deg, rgba(18, 18, 26, 0.9) 0%, rgba(18, 18, 26, 0.7) 100%);
+    }
+    
+    .pricing-popular {
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+      border: 2px solid rgba(0, 212, 255, 0.5);
+    }
+    
+    .step-line {
+      background: linear-gradient(180deg, #00d4ff 0%, #a855f7 100%);
+    }
+    
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0a0a0f; }
+    ::-webkit-scrollbar-thumb { 
+      background: linear-gradient(180deg, #00d4ff, #a855f7);
+      border-radius: 4px;
+    }
+    
+    .browser-mockup {
+      background: #1a1a24;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+    }
+    
+    .browser-header {
+      background: #12121a;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .browser-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: linear-gradient(135deg, #00d4ff 0%, #a855f7 100%);
+      color: white;
+      padding: 16px 32px;
+      border-radius: 12px;
+      font-weight: 600;
+      z-index: 9999;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .limit-warning {
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid rgba(239, 68, 68, 0.5);
+      color: #fca5a5;
+      padding: 12px 20px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      display: none;
+    }
+
+    .limit-warning.show {
+      display: block;
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full bg-[#0a0a0f] text-white overflow-auto">
+  <div id="app-wrapper" class="w-full h-full overflow-auto"><!-- Sticky Navigation -->
+   <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="flex items-center justify-between h-20"><!-- Logo --> <a href="#hero" class="flex items-center gap-2">
+       <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center"><span class="mono text-lg font-bold">&lt;/&gt;</span>
+       </div><span class="text-xl font-bold">Site<span class="gradient-text">Spark</span></span> </a> <!-- Desktop Menu -->
+      <div class="hidden lg:flex items-center gap-8"><a href="#about" class="text-gray-300 hover:text-cyan-400 transition-colors">About</a> <a href="#services" class="text-gray-300 hover:text-cyan-400 transition-colors">Services</a> <a href="#portfolio" class="text-gray-300 hover:text-cyan-400 transition-colors">Portfolio</a> <a href="#pricing" class="text-gray-300 hover:text-cyan-400 transition-colors">Pricing</a> <a href="#contact" class="text-gray-300 hover:text-cyan-400 transition-colors">Contact</a> <a href="#booking" class="btn-primary px-6 py-3 rounded-full font-semibold">Book Consultation</a>
+      </div><!-- Mobile Menu Button --> <button id="mobile-menu-btn" class="lg:hidden p-2" aria-label="Toggle menu">
+       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+       </svg></button>
+     </div>
+    </div><!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-[#12121a] border-t border-purple-500/20">
+     <div class="px-4 py-6 space-y-4"><a href="#about" class="block text-gray-300 hover:text-cyan-400 py-2">About</a> <a href="#services" class="block text-gray-300 hover:text-cyan-400 py-2">Services</a> <a href="#portfolio" class="block text-gray-300 hover:text-cyan-400 py-2">Portfolio</a> <a href="#pricing" class="block text-gray-300 hover:text-cyan-400 py-2">Pricing</a> <a href="#contact" class="block text-gray-300 hover:text-cyan-400 py-2">Contact</a> <a href="#booking" class="btn-primary block text-center px-6 py-3 rounded-full font-semibold mt-4">Book Consultation</a>
+     </div>
+    </div>
+   </nav><!-- Hero Section -->
+   <section id="hero" class="relative min-h-screen flex items-center hero-gradient grid-bg pt-20"><!-- Floating Sparks -->
+    <div class="spark" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+    <div class="spark" style="top: 30%; left: 80%; animation-delay: 0.5s;"></div>
+    <div class="spark" style="top: 60%; left: 15%; animation-delay: 1s;"></div>
+    <div class="spark" style="top: 70%; left: 85%; animation-delay: 1.5s;"></div>
+    <div class="spark" style="top: 40%; left: 50%; animation-delay: 2s;"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+     <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="fade-in">
+       <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 mb-6"><span class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></span> <span class="text-sm text-purple-300">Web Development Agency</span>
+       </div>
+       <h1 id="hero-title" class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">We Build Websites That <span class="gradient-text">Bring Customers</span> to Your Business</h1>
+       <p id="hero-subtitle" class="text-lg sm:text-xl text-gray-400 mb-8 max-w-xl">SiteSpark helps cafes, restaurants, shops, and startups establish a powerful online presence with modern, conversion-focused websites that drive real business results.</p>
+       <div class="flex flex-col sm:flex-row gap-4"><a href="#booking" class="btn-primary px-8 py-4 rounded-full font-semibold text-center text-lg"> Book Free Consultation </a> 
+        <a href="#portfolio" class="btn-secondary px-8 py-4 rounded-full font-semibold text-center text-lg text-cyan-400"> View Demo Websites </a>
+       </div><!-- Trust Badges -->
+       <div class="flex items-center gap-6 mt-10">
+        <div class="text-center">
+         <div class="text-2xl font-bold gradient-text">
+          50+
+         </div>
+         <div class="text-sm text-gray-500">
+          Websites Built
+         </div>
+        </div>
+        <div class="w-px h-10 bg-purple-500/30"></div>
+        <div class="text-center">
+         <div class="text-2xl font-bold gradient-text">
+          98%
+         </div>
+         <div class="text-sm text-gray-500">
+          Client Satisfaction
+         </div>
+        </div>
+        <div class="w-px h-10 bg-purple-500/30"></div>
+        <div class="text-center">
+         <div class="text-2xl font-bold gradient-text">
+          24h
+         </div>
+         <div class="text-sm text-gray-500">
+          Fast Response
+         </div>
+        </div>
+       </div>
+      </div><!-- Hero Visual -->
+      <div class="fade-in hidden lg:block" style="animation-delay: 0.3s;">
+       <div class="relative"><!-- Browser Mockup -->
+        <div class="browser-mockup glow-purple">
+         <div class="browser-header">
+          <div class="browser-dot bg-red-500"></div>
+          <div class="browser-dot bg-yellow-500"></div>
+          <div class="browser-dot bg-green-500"></div>
+          <div class="flex-1 ml-4">
+           <div class="bg-[#0a0a0f] rounded-md px-4 py-1.5 text-sm text-gray-400 mono">
+            https://yourwebsite.com
+           </div>
+          </div>
+         </div>
+         <div class="p-6 space-y-4"><!-- Wireframe Elements -->
+          <div class="wireframe-element p-4 flex items-center gap-4">
+           <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-400/30 to-purple-500/30"></div>
+           <div class="flex-1">
+            <div class="h-3 w-24 bg-purple-500/30 rounded mb-2"></div>
+            <div class="h-2 w-16 bg-cyan-400/20 rounded"></div>
+           </div>
+          </div>
+          <div class="grid grid-cols-3 gap-3">
+           <div class="wireframe-element p-3 h-20"></div>
+           <div class="wireframe-element p-3 h-20"></div>
+           <div class="wireframe-element p-3 h-20"></div>
+          </div>
+          <div class="wireframe-element p-4 h-32 flex items-center justify-center"><span class="code-bracket text-2xl">&lt;Your Content/&gt;</span>
+          </div>
+         </div>
+        </div><!-- Floating Elements -->
+        <div class="absolute -top-4 -right-4 w-16 h-16 rounded-xl bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center floating-btn"><span class="mono text-2xl font-bold">&lt;&gt;</span>
+        </div>
+        <div class="absolute -bottom-4 -left-4 w-20 h-20 rounded-xl glass-card flex items-center justify-center">
+         <svg class="w-10 h-10 text-cyan-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+         </svg>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div><!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+     <div class="w-6 h-10 border-2 border-purple-500/50 rounded-full flex justify-center pt-2">
+      <div class="w-1.5 h-3 bg-cyan-400 rounded-full animate-bounce"></div>
+     </div>
+    </div>
+   </section><!-- About Section -->
+   <section id="about" class="py-24 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <div class="fade-in"><span class="code-bracket text-lg">&lt;about&gt;</span>
+       <h2 id="about-title" class="text-3xl sm:text-4xl font-bold mt-4 mb-6">Empowering Local Businesses with <span class="gradient-text">Digital Excellence</span></h2>
+       <p class="text-gray-400 text-lg mb-6">SiteSpark was founded with a simple mission: help small and medium businesses compete in the digital age. We understand that your website is often the first impression customers have of your business.</p>
+       <p class="text-gray-400 mb-8">Our team combines creative design expertise with technical excellence to deliver websites that don't just look beautiful – they convert visitors into loyal customers. From cozy cafes to bustling restaurants, from boutique shops to innovative startups, we've helped businesses across industries establish their digital presence.</p><!-- Mission Card -->
+       <div class="glass-card rounded-2xl p-6 mb-8">
+        <div class="flex items-start gap-4">
+         <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-400/20 to-purple-500/20 flex items-center justify-center flex-shrink-0">
+          <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+         </div>
+         <div>
+          <h3 class="font-semibold text-lg mb-2">Our Mission</h3>
+          <p class="text-gray-400">To democratize professional web presence for businesses of all sizes, making powerful digital solutions accessible and affordable.</p>
+         </div>
+        </div>
+       </div><span class="code-bracket text-lg">&lt;/about&gt;</span>
+      </div>
+      <div class="fade-in" style="animation-delay: 0.2s;"><!-- Tech Stack -->
+       <div class="glass-card rounded-2xl p-8">
+        <h3 class="text-xl font-semibold mb-6 flex items-center gap-2"><span class="code-bracket">&lt;</span> Our Tech Stack <span class="code-bracket">/&gt;</span></h3>
+        <div class="grid grid-cols-2 gap-4">
+         <div class="bg-[#0a0a0f] rounded-xl p-4 flex items-center gap-3 border border-purple-500/20 hover:border-cyan-400/40 transition-colors">
+          <div class="w-12 h-12 rounded-lg bg-orange-500/20 flex items-center justify-center">
+           <svg class="w-6 h-6 text-orange-400" viewbox="0 0 24 24" fill="currentColor"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z" />
+           </svg>
+          </div>
+          <div>
+           <div class="font-semibold">
+            HTML5
+           </div>
+           <div class="text-xs text-gray-500">
+            Structure
+           </div>
+          </div>
+         </div>
+         <div class="bg-[#0a0a0f] rounded-xl p-4 flex items-center gap-3 border border-purple-500/20 hover:border-cyan-400/40 transition-colors">
+          <div class="w-12 h-12 rounded-lg bg-blue-500/20 flex items-center justify-center">
+           <svg class="w-6 h-6 text-blue-400" viewbox="0 0 24 24" fill="currentColor"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716h-6.64l.24 2.573h6.182l-.366 3.523-2.91.804-2.956-.81-.188-2.11h-2.61l.29 3.855L12 19.288l5.373-1.53L18.59 4.414z" />
+           </svg>
+          </div>
+          <div>
+           <div class="font-semibold">
+            CSS3
+           </div>
+           <div class="text-xs text-gray-500">
+            Styling
+           </div>
+          </div>
+         </div>
+         <div class="bg-[#0a0a0f] rounded-xl p-4 flex items-center gap-3 border border-purple-500/20 hover:border-cyan-400/40 transition-colors">
+          <div class="w-12 h-12 rounded-lg bg-yellow-500/20 flex items-center justify-center">
+           <svg class="w-6 h-6 text-yellow-400" viewbox="0 0 24 24" fill="currentColor"><path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z" />
+           </svg>
+          </div>
+          <div>
+           <div class="font-semibold">
+            JavaScript
+           </div>
+           <div class="text-xs text-gray-500">
+            Interactivity
+           </div>
+          </div>
+         </div>
+         <div class="bg-[#0a0a0f] rounded-xl p-4 flex items-center gap-3 border border-purple-500/20 hover:border-cyan-400/40 transition-colors">
+          <div class="w-12 h-12 rounded-lg bg-purple-500/20 flex items-center justify-center">
+           <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+           </svg>
+          </div>
+          <div>
+           <div class="font-semibold">
+            UI Design
+           </div>
+           <div class="text-xs text-gray-500">
+            Figma &amp; More
+           </div>
+          </div>
+         </div>
+         <div class="bg-[#0a0a0f] rounded-xl p-4 flex items-center gap-3 border border-purple-500/20 hover:border-cyan-400/40 transition-colors">
+          <div class="w-12 h-12 rounded-lg bg-cyan-500/20 flex items-center justify-center">
+           <svg class="w-6 h-6 text-cyan-400" viewbox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-2 18h-2v-8h2v8zm-1-9.5c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5 1.5.672 1.5 1.5-.672 1.5-1.5 1.5zm9.5 9.5h-2v-4c0-1.657-.673-2.765-2.067-2.765-1.13 0-1.807.754-2.105 1.481-.108.263-.135.631-.135 1v4.289h-2V10h2v1.084c.319-.495 1.158-1.2 2.814-1.2 2.06 0 3.605 1.345 3.605 4.242v4.874z" />
+           </svg>
+          </div>
+          <div>
+           <div class="font-semibold">
+            React
+           </div>
+           <div class="text-xs text-gray-500">
+            Frontend
+           </div>
+          </div>
+         </div>
+         <div class="bg-[#0a0a0f] rounded-xl p-4 flex items-center gap-3 border border-purple-500/20 hover:border-cyan-400/40 transition-colors">
+          <div class="w-12 h-12 rounded-lg bg-green-500/20 flex items-center justify-center">
+           <svg class="w-6 h-6 text-green-400" viewbox="0 0 24 24" fill="currentColor"><path d="M10.854 7.48c-.293-.082-.586-.082-.88 0-1.704.454-2.904 2.036-2.904 3.88v6.12c0 2.206 1.794 4 4 4h6c2.206 0 4-1.794 4-4v-6.12c0-1.844-1.2-3.426-2.904-3.88-.294-.082-.587-.082-.88 0m1.146 4.22v3.6c0 .22-.18.4-.4.4s-.4-.18-.4-.4v-3.6c0-.22.18-.4.4-.4s.4.18.4.4m4 0v3.6c0 .22-.18.4-.4.4s-.4-.18-.4-.4v-3.6c0-.22.18-.4.4-.4s.4.18.4.4" />
+           </svg>
+          </div>
+          <div>
+           <div class="font-semibold">
+            Node.js
+           </div>
+           <div class="text-xs text-gray-500">
+            Backend
+           </div>
+          </div>
+         </div>
+         <div class="bg-[#0a0a0f] rounded-xl p-4 flex items-center gap-3 border border-purple-500/20 hover:border-cyan-400/40 transition-colors">
+          <div class="w-12 h-12 rounded-lg bg-blue-600/20 flex items-center justify-center">
+           <svg class="w-6 h-6 text-blue-400" viewbox="0 0 24 24" fill="currentColor"><path d="M3.5 0h17C21.329 0 23 1.671 23 3.5v17c0 1.829-1.671 3.5-3.5 3.5h-17C1.671 24 0 22.329 0 20.5v-17C0 1.671 1.671 0 3.5 0zM6.416 14.333V9.667H5.5V15h4.834v-.667h-3.918zm6.708.667h1.209V12.5h2.5v-1.333h-2.5v-1.834h2.833V8h-4.042v6.667zM19 9.667h-1.333V15h1.333V9.667z" />
+           </svg>
+          </div>
+          <div>
+           <div class="font-semibold">
+            MongoDB
+           </div>
+           <div class="text-xs text-gray-500">
+            Database
+           </div>
+          </div>
+         </div>
+         <div class="bg-[#0a0a0f] rounded-xl p-4 flex items-center gap-3 border border-purple-500/20 hover:border-cyan-400/40 transition-colors">
+          <div class="w-12 h-12 rounded-lg bg-sky-500/20 flex items-center justify-center">
+           <svg class="w-6 h-6 text-sky-400" viewbox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-1.5 6h3v2h-3V6zm0 4h3v2h-3v-2zm-3-4h3v2h-3V6zm0 4h3v2h-3v-2zm7-4h3v2h-3V6zm0 4h3v2h-3v-2zm-3 6h3v2h-3v-2z" />
+           </svg>
+          </div>
+          <div>
+           <div class="font-semibold">
+            Tailwind CSS
+           </div>
+           <div class="text-xs text-gray-500">
+            Utility CSS
+           </div>
+          </div>
+         </div>
+         <div class="bg-[#0a0a0f] rounded-xl p-4 flex items-center gap-3 border border-purple-500/20 hover:border-cyan-400/40 transition-colors">
+          <div class="w-12 h-12 rounded-lg bg-red-600/20 flex items-center justify-center">
+           <svg class="w-6 h-6 text-red-400" viewbox="0 0 24 24" fill="currentColor"><path d="M21.52 17.458c-.84.672-2.16 1.356-3.96 1.356-2.556 0-4.716-1.344-6.12-3.456.516-1.884 2.04-3.372 3.912-3.372.408 0 .816.048 1.212.156v-2.568c-1.08-.24-2.208-.36-3.348-.36-3.792 0-7.128 1.752-9.036 4.392.12-.024.24-.036.36-.036 1.404 0 2.724.384 3.864 1.056-2.04 2.4-3.204 5.352-3.204 8.628 0 1.752.324 3.432.924 4.992h2.928c-.468-1.512-.72-3.132-.72-4.8 0-1.956.312-3.84.912-5.592 1.584 2.304 4.2 3.816 7.128 3.816 1.272 0 2.472-.276 3.564-.792v-2.424zm-21.52-13.458v24h24v-24h-24z" />
+           </svg>
+          </div>
+          <div>
+           <div class="font-semibold">
+            SQL
+           </div>
+           <div class="text-xs text-gray-500">
+            Database Query
+           </div>
+          </div>
+         </div>
+         <div class="bg-[#0a0a0f] rounded-xl p-4 flex items-center gap-3 border border-purple-500/20 hover:border-cyan-400/40 transition-colors">
+          <div class="w-12 h-12 rounded-lg bg-orange-600/20 flex items-center justify-center">
+           <svg class="w-6 h-6 text-orange-400" viewbox="0 0 24 24" fill="currentColor"><path d="M11.044 6.667c0 .367-.298.665-.666.665H3.334c-.368 0-.667-.298-.667-.665V3.333c0-.367.299-.666.667-.666h6.667c.368 0 .666.299.666.666v3.334zm10-3.334v3.334c0 .367-.298.665-.665.665H12.71c-.367 0-.666-.298-.666-.665V3.333c0-.367.299-.666.666-.666h7.333c.367 0 .665.299.665.666zm-10 10v3.334c0 .367-.298.665-.666.665H3.334c-.368 0-.667-.298-.667-.665v-3.334c0-.368.299-.666.667-.666h6.667c.368 0 .666.298.666.666zm10 0v3.334c0 .367-.298.665-.665.665H12.71c-.367 0-.666-.298-.666-.665v-3.334c0-.368.299-.666.666-.666h7.333c.367 0 .665.298.665.666zm-10 10v3.334c0 .367-.298.665-.666.665H3.334c-.368 0-.667-.298-.667-.665v-3.334c0-.368.299-.666.667-.666h6.667c.368 0 .666.298.666.666zm10 0v3.334c0 .367-.298.665-.665.665H12.71c-.367 0-.666-.298-.666-.665v-3.334c0-.368.299-.666.666-.666h7.333c.367 0 .665.298.665.666z" />
+           </svg>
+          </div>
+          <div>
+           <div class="font-semibold">
+            Java Spring Boot
+           </div>
+           <div class="text-xs text-gray-500">
+            Backend Framework
+           </div>
+          </div>
+         </div>
+        </div><!-- Stats -->
+        <div class="grid grid-cols-3 gap-4 mt-8 pt-8 border-t border-purple-500/20">
+         <div class="text-center">
+          <div class="text-3xl font-bold gradient-text">
+           3+
+          </div>
+          <div class="text-sm text-gray-500 mt-1">
+           Years Experience
+          </div>
+         </div>
+         <div class="text-center">
+          <div class="text-3xl font-bold gradient-text">
+           50+
+          </div>
+          <div class="text-sm text-gray-500 mt-1">
+           Projects Done
+          </div>
+         </div>
+         <div class="text-center">
+          <div class="text-3xl font-bold gradient-text">
+           50+
+          </div>
+          <div class="text-sm text-gray-500 mt-1">
+           Happy Clients
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Services Section -->
+   <section id="services" class="py-24 relative bg-gradient-to-b from-transparent via-purple-500/5 to-transparent">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16 fade-in"><span class="code-bracket text-lg">&lt;services&gt;</span>
+      <h2 class="text-3xl sm:text-4xl font-bold mt-4 mb-4">Comprehensive <span class="gradient-text">Web Solutions</span></h2>
+      <p class="text-gray-400 max-w-2xl mx-auto">From stunning designs to powerful functionality, we offer everything your business needs to succeed online.</p>
+     </div>
+     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"><!-- Service Card 1 -->
+      <div class="fade-in glass-card rounded-2xl p-6 group hover:scale-105 transition-transform duration-300">
+       <div class="service-icon w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:glow-blue transition-all">
+        <svg class="w-7 h-7 text-cyan-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+       </div>
+       <h3 class="text-xl font-semibold mb-2">Website Design</h3>
+       <p class="text-gray-400 text-sm mb-4">Custom, modern designs that capture your brand essence and engage your audience from the first click.</p>
+       <ul class="text-sm text-gray-500 space-y-2">
+        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span> Custom UI/UX Design</li>
+        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span> Brand-aligned visuals</li>
+       </ul>
+      </div><!-- Service Card 2 -->
+      <div class="fade-in glass-card rounded-2xl p-6 group hover:scale-105 transition-transform duration-300" style="animation-delay: 0.1s;">
+       <div class="service-icon w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:glow-blue transition-all">
+        <svg class="w-7 h-7 text-cyan-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+        </svg>
+       </div>
+       <h3 class="text-xl font-semibold mb-2">Business Websites</h3>
+       <p class="text-gray-400 text-sm mb-4">Professional websites that establish credibility and convert visitors into customers.</p>
+       <ul class="text-sm text-gray-500 space-y-2">
+        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span> Lead generation focus</li>
+        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span> Contact forms &amp; CTAs</li>
+       </ul>
+      </div><!-- Service Card 3 -->
+      <div class="fade-in glass-card rounded-2xl p-6 group hover:scale-105 transition-transform duration-300" style="animation-delay: 0.2s;">
+       <div class="service-icon w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:glow-blue transition-all">
+        <svg class="w-7 h-7 text-cyan-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        </svg>
+       </div>
+       <h3 class="text-xl font-semibold mb-2">Cafe &amp; Restaurant Menus</h3>
+       <p class="text-gray-400 text-sm mb-4">Beautiful digital menus that showcase your offerings and enable easy online ordering.</p>
+       <ul class="text-sm text-gray-500 space-y-2">
+        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span> Interactive menu display</li>
+        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span> WhatsApp order integration</li>
+       </ul>
+      </div><!-- Service Card 4 -->
+      <div class="fade-in glass-card rounded-2xl p-6 group hover:scale-105 transition-transform duration-300" style="animation-delay: 0.3s;">
+       <div class="service-icon w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:glow-blue transition-all">
+        <svg class="w-7 h-7 text-cyan-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+       </div>
+       <h3 class="text-xl font-semibold mb-2">E-commerce Websites</h3>
+       <p class="text-gray-400 text-sm mb-4">Fully-functional online stores that make selling products easy and seamless.</p>
+       <ul class="text-sm text-gray-500 space-y-2">
+        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span> Product catalogs</li>
+        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span> Secure checkout</li>
+       </ul>
+      </div><!-- Service Card 5 -->
+      <div class="fade-in glass-card rounded-2xl p-6 group hover:scale-105 transition-transform duration-300" style="animation-delay: 0.4s;">
+       <div class="service-icon w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:glow-blue transition-all">
+        <svg class="w-7 h-7 text-cyan-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+       </div>
+       <h3 class="text-xl font-semibold mb-2">Website Redesign</h3>
+       <p class="text-gray-400 text-sm mb-4">Transform your outdated website into a modern, high-performing digital asset.</p>
+       <ul class="text-sm text-gray-500 space-y-2">
+        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span> Modern UI refresh</li>
+        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span> Performance optimization</li>
+       </ul>
+      </div><!-- Service Card 6 -->
+      <div class="fade-in glass-card rounded-2xl p-6 group hover:scale-105 transition-transform duration-300" style="animation-delay: 0.5s;">
+       <div class="service-icon w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:glow-blue transition-all">
+        <svg class="w-7 h-7 text-cyan-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+       </div>
+       <h3 class="text-xl font-semibold mb-2">Website Maintenance</h3>
+       <p class="text-gray-400 text-sm mb-4">Keep your website secure, updated, and performing at its best with ongoing support.</p>
+       <ul class="text-sm text-gray-500 space-y-2">
+        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span> Regular updates</li>
+        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span> Security monitoring</li>
+       </ul>
+      </div><!-- Service Card 7 - Full Width -->
+      <div class="fade-in glass-card rounded-2xl p-6 group hover:scale-105 transition-transform duration-300 md:col-span-2 lg:col-span-3" style="animation-delay: 0.6s;">
+       <div class="flex flex-col lg:flex-row items-center gap-6">
+        <div class="service-icon w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:glow-purple transition-all">
+         <svg class="w-7 h-7 text-purple-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m0 0h4a1 1 0 011 1v3M7 4H3a1 1 0 00-1 1v3m18 0v10a2 2 0 01-2 2H5a2 2 0 01-2-2V8m18 0H3" />
+         </svg>
+        </div>
+        <div class="text-center lg:text-left">
+         <h3 class="text-xl font-semibold mb-2">Social Media Branding</h3>
+         <p class="text-gray-400">Complete social media presence setup including profile designs, cover images, content templates, and brand consistency guidelines across all platforms.</p>
+        </div><a href="#booking" class="btn-primary px-6 py-3 rounded-full font-semibold whitespace-nowrap flex-shrink-0"> Get Started </a>
+       </div>
+      </div>
+     </div>
+     <div class="text-center mt-12"><span class="code-bracket text-lg">&lt;/services&gt;</span>
+     </div>
+    </div>
+   </section><!-- Portfolio Section -->
+   <section id="portfolio" class="py-24 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16 fade-in"><span class="code-bracket text-lg">&lt;portfolio&gt;</span>
+      <h2 class="text-3xl sm:text-4xl font-bold mt-4 mb-4">Demo <span class="gradient-text">Websites</span></h2>
+      <p class="text-gray-400 max-w-2xl mx-auto">Explore our portfolio of website demos designed for different industries.</p>
+     </div>
+     <div class="grid md:grid-cols-2 gap-8"><!-- Demo 1 - Cafe -->
+      <div class="fade-in group">
+       <div class="browser-mockup overflow-hidden">
+        <div class="browser-header">
+         <div class="browser-dot bg-red-500"></div>
+         <div class="browser-dot bg-yellow-500"></div>
+         <div class="browser-dot bg-green-500"></div>
+         <div class="flex-1 ml-4">
+          <div class="bg-[#0a0a0f] rounded-md px-3 py-1 text-xs text-gray-400 mono truncate">
+           demo-cafe.sitespark.com
+          </div>
+         </div>
+        </div>
+        <div class="relative h-64 bg-gradient-to-br from-amber-900/30 to-orange-900/30 flex items-center justify-center overflow-hidden">
+         <div class="absolute inset-0 opacity-20">
+          <div class="absolute top-4 left-4 w-20 h-3 bg-white/30 rounded"></div>
+          <div class="absolute top-4 right-4 flex gap-2">
+           <div class="w-8 h-2 bg-white/30 rounded"></div>
+           <div class="w-8 h-2 bg-white/30 rounded"></div>
+           <div class="w-8 h-2 bg-white/30 rounded"></div>
+          </div>
+          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+           <div class="w-32 h-6 bg-white/30 rounded mb-2 mx-auto"></div>
+           <div class="w-48 h-3 bg-white/20 rounded mx-auto"></div>
+          </div>
+          <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2">
+           <div class="w-24 h-8 bg-amber-500/50 rounded-full"></div>
+           <div class="w-24 h-8 bg-white/20 rounded-full"></div>
+          </div>
+         </div>
+         <div class="text-center z-10">
+          <div class="text-4xl mb-2">
+           ☕
+          </div>
+          <h3 class="text-xl font-semibold">Brew Besto</h3>
+          <p class="text-sm text-gray-400">Cafe Website</p>
+         </div>
+        </div>
+       </div>
+       <div class="flex justify-center mt-4">
+        <a href="https://brew-besto-cafe-e-commerce.vercel.app/" target="_blank">
+          <button class="btn-primary px-8 py-3 rounded-xl font-semibold text-sm">
+            Live Preview
+          </button>
+        </a>
+      </div>
+      </div>
+
+
+      <div class="fade-in group" style="animation-delay: 0.2s;">
+        <div class="browser-mockup overflow-hidden">
+         <div class="browser-header">
+          <div class="browser-dot bg-red-500"></div>
+          <div class="browser-dot bg-yellow-500"></div>
+          <div class="browser-dot bg-green-500"></div>
+          <div class="flex-1 ml-4">
+           <div class="bg-[#0a0a0f] rounded-md px-3 py-1 text-xs text-gray-400 mono truncate">
+            demo-shop.sitespark.com
+           </div>
+          </div>
+         </div>
+         <div class="relative h-64 bg-gradient-to-br from-emerald-900/30 to-teal-900/30 flex items-center justify-center overflow-hidden">
+          <div class="absolute inset-0 opacity-20">
+           <div class="absolute top-4 left-4 w-20 h-3 bg-white/30 rounded"></div>
+           <div class="absolute top-4 right-4 w-8 h-8 bg-white/20 rounded-full"></div>
+           <div class="grid grid-cols-2 gap-3 p-6 mt-8">
+            <div class="h-20 bg-white/10 rounded"></div>
+            <div class="h-20 bg-white/10 rounded"></div>
+            <div class="h-20 bg-white/10 rounded"></div>
+            <div class="h-20 bg-white/10 rounded"></div>
+           </div>
+          </div>
+          <div class="text-center z-10">
+           <div class="text-4xl mb-2">
+            💄
+           </div>
+           <h3 class="text-xl font-semibold">Parlor</h3>
+           <p class="text-sm text-gray-400">Parlor Website</p>
+          </div>
+         </div>
+        </div>
+        <div class="flex justify-center mt-4">
+          <a href="https://brew-besto-cafe-e-commerce.vercel.app/" target="_blank">
+            <button class="btn-primary px-8 py-3 rounded-xl font-semibold text-sm">
+              Live Preview
+            </button>
+          </a>
+        </div>
+       </div>
+      
+      <!--
+      <div class="fade-in group" style="animation-delay: 0.1s;">
+       <div class="browser-mockup overflow-hidden">
+        <div class="browser-header">
+         <div class="browser-dot bg-red-500"></div>
+         <div class="browser-dot bg-yellow-500"></div>
+         <div class="browser-dot bg-green-500"></div>
+         <div class="flex-1 ml-4">
+          <div class="bg-[#0a0a0f] rounded-md px-3 py-1 text-xs text-gray-400 mono truncate">
+           demo-restaurant.sitespark.com
+          </div>
+         </div>
+        </div>
+        <div class="relative h-64 bg-gradient-to-br from-red-900/30 to-rose-900/30 flex items-center justify-center overflow-hidden">
+         <div class="absolute inset-0 opacity-20">
+          <div class="absolute top-4 left-4 w-20 h-3 bg-white/30 rounded"></div>
+          <div class="absolute top-4 right-4 flex gap-2">
+           <div class="w-8 h-2 bg-white/30 rounded"></div>
+           <div class="w-8 h-2 bg-white/30 rounded"></div>
+          </div>
+          <div class="grid grid-cols-3 gap-2 p-8 mt-8">
+           <div class="h-16 bg-white/10 rounded"></div>
+           <div class="h-16 bg-white/10 rounded"></div>
+           <div class="h-16 bg-white/10 rounded"></div>
+          </div>
+         </div>
+         <div class="text-center z-10">
+          <div class="text-4xl mb-2">
+           🍽️
+          </div>
+          <h3 class="text-xl font-semibold">Bella Italia</h3>
+          <p class="text-sm text-gray-400">Restaurant Menu Website</p>
+         </div>
+        </div>
+       </div>
+       <div class="flex gap-3 mt-4"><button class="flex-1 btn-primary px-4 py-3 rounded-xl font-semibold text-sm"> Live Preview </button> <button class="flex-1 btn-secondary px-4 py-3 rounded-xl font-semibold text-sm text-cyan-400"> View Design </button>
+       </div>
+      </div>
+      
+      <div class="fade-in group" style="animation-delay: 0.2s;">
+       <div class="browser-mockup overflow-hidden">
+        <div class="browser-header">
+         <div class="browser-dot bg-red-500"></div>
+         <div class="browser-dot bg-yellow-500"></div>
+         <div class="browser-dot bg-green-500"></div>
+         <div class="flex-1 ml-4">
+          <div class="bg-[#0a0a0f] rounded-md px-3 py-1 text-xs text-gray-400 mono truncate">
+           demo-shop.sitespark.com
+          </div>
+         </div>
+        </div>
+        <div class="relative h-64 bg-gradient-to-br from-emerald-900/30 to-teal-900/30 flex items-center justify-center overflow-hidden">
+         <div class="absolute inset-0 opacity-20">
+          <div class="absolute top-4 left-4 w-20 h-3 bg-white/30 rounded"></div>
+          <div class="absolute top-4 right-4 w-8 h-8 bg-white/20 rounded-full"></div>
+          <div class="grid grid-cols-2 gap-3 p-6 mt-8">
+           <div class="h-20 bg-white/10 rounded"></div>
+           <div class="h-20 bg-white/10 rounded"></div>
+           <div class="h-20 bg-white/10 rounded"></div>
+           <div class="h-20 bg-white/10 rounded"></div>
+          </div>
+         </div>
+         <div class="text-center z-10">
+          <div class="text-4xl mb-2">
+           🛍️
+          </div>
+          <h3 class="text-xl font-semibold">Urban Style</h3>
+          <p class="text-sm text-gray-400">Small Business Website</p>
+         </div>
+        </div>
+       </div>
+       <div class="flex gap-3 mt-4"><button class="flex-1 btn-primary px-4 py-3 rounded-xl font-semibold text-sm"> Live Preview </button> <button class="flex-1 btn-secondary px-4 py-3 rounded-xl font-semibold text-sm text-cyan-400"> View Design </button>
+       </div>
+      </div>
+      
+      <div class="fade-in group" style="animation-delay: 0.3s;">
+       <div class="browser-mockup overflow-hidden">
+        <div class="browser-header">
+         <div class="browser-dot bg-red-500"></div>
+         <div class="browser-dot bg-yellow-500"></div>
+         <div class="browser-dot bg-green-500"></div>
+         <div class="flex-1 ml-4">
+          <div class="bg-[#0a0a0f] rounded-md px-3 py-1 text-xs text-gray-400 mono truncate">
+           demo-orders.sitespark.com
+          </div>
+         </div>
+        </div>
+        <div class="relative h-64 bg-gradient-to-br from-violet-900/30 to-purple-900/30 flex items-center justify-center overflow-hidden">
+         <div class="absolute inset-0 opacity-20">
+          <div class="flex justify-between items-center p-4">
+           <div class="w-16 h-3 bg-white/30 rounded"></div>
+           <div class="flex gap-2">
+            <div class="w-6 h-6 bg-white/20 rounded"></div>
+            <div class="w-6 h-6 bg-white/20 rounded-full"></div>
+           </div>
+          </div>
+          <div class="px-4 space-y-2 mt-4">
+           <div class="flex gap-3 bg-white/10 rounded-lg p-2">
+            <div class="w-12 h-12 bg-white/20 rounded"></div>
+            <div class="flex-1">
+             <div class="w-20 h-2 bg-white/30 rounded mb-1"></div>
+             <div class="w-12 h-2 bg-white/20 rounded"></div>
+            </div>
+            <div class="w-8 h-6 bg-green-500/50 rounded"></div>
+           </div>
+           <div class="flex gap-3 bg-white/10 rounded-lg p-2">
+            <div class="w-12 h-12 bg-white/20 rounded"></div>
+            <div class="flex-1">
+             <div class="w-20 h-2 bg-white/30 rounded mb-1"></div>
+             <div class="w-12 h-2 bg-white/20 rounded"></div>
+            </div>
+            <div class="w-8 h-6 bg-green-500/50 rounded"></div>
+           </div>
+          </div>
+         </div>
+         <div class="text-center z-10">
+          <div class="text-4xl mb-2">
+           📱
+          </div>
+          <h3 class="text-xl font-semibold">QuickBite</h3>
+          <p class="text-sm text-gray-400">Online Ordering Website</p>
+         </div>
+        </div>
+       </div>
+       <div class="flex gap-3 mt-4"><button class="flex-1 btn-primary px-4 py-3 rounded-xl font-semibold text-sm"> Live Preview </button> <button class="flex-1 btn-secondary px-4 py-3 rounded-xl font-semibold text-sm text-cyan-400"> View Design </button>
+       </div>
+      </div>
+      -->
+     </div>
+     <div class="text-center mt-12"><span class="code-bracket text-lg">&lt;/portfolio&gt;</span>
+     </div>
+    </div>
+   </section><!-- Why Choose Us Section -->
+   <section id="why-us" class="py-24 relative bg-gradient-to-b from-transparent via-cyan-500/5 to-transparent">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16 fade-in"><span class="code-bracket text-lg">&lt;why-sitespark&gt;</span>
+      <h2 class="text-3xl sm:text-4xl font-bold mt-4 mb-4">Why Choose <span class="gradient-text">SiteSpark</span>?</h2>
+      <p class="text-gray-400 max-w-2xl mx-auto">We're not just building websites – we're building your business's digital success story.</p>
+     </div>
+     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="fade-in glass-card rounded-2xl p-6 text-center hover:border-cyan-400/40 transition-all">
+       <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-400/20 to-purple-500/20 flex items-center justify-center mx-auto mb-4">
+        <svg class="w-8 h-8 text-cyan-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+        </svg>
+       </div>
+       <h3 class="font-semibold text-lg mb-2">Mobile-Friendly</h3>
+       <p class="text-gray-400 text-sm">Responsive designs that look perfect on all devices</p>
+      </div>
+      <div class="fade-in glass-card rounded-2xl p-6 text-center hover:border-cyan-400/40 transition-all" style="animation-delay: 0.1s;">
+       <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-400/20 to-purple-500/20 flex items-center justify-center mx-auto mb-4">
+        <svg class="w-8 h-8 text-cyan-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+       </div>
+       <h3 class="font-semibold text-lg mb-2">Lightning Fast</h3>
+       <p class="text-gray-400 text-sm">Optimized code for blazing fast load times</p>
+      </div>
+      <div class="fade-in glass-card rounded-2xl p-6 text-center hover:border-cyan-400/40 transition-all" style="animation-delay: 0.2s;">
+       <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-400/20 to-purple-500/20 flex items-center justify-center mx-auto mb-4">
+        <svg class="w-8 h-8 text-cyan-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+       </div>
+       <h3 class="font-semibold text-lg mb-2">Affordable</h3>
+       <p class="text-gray-400 text-sm">Quality websites at prices small businesses can afford</p>
+      </div>
+      <div class="fade-in glass-card rounded-2xl p-6 text-center hover:border-cyan-400/40 transition-all" style="animation-delay: 0.3s;">
+       <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-400/20 to-purple-500/20 flex items-center justify-center mx-auto mb-4">
+        <svg class="w-8 h-8 text-green-400" fill="currentColor" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+       </div>
+       <h3 class="font-semibold text-lg mb-2">WhatsApp Integration</h3>
+       <p class="text-gray-400 text-sm">Direct ordering and chat integration for instant customer connection</p>
+      </div>
+      <div class="fade-in glass-card rounded-2xl p-6 text-center hover:border-cyan-400/40 transition-all" style="animation-delay: 0.4s;">
+       <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-400/20 to-purple-500/20 flex items-center justify-center mx-auto mb-4">
+        <svg class="w-8 h-8 text-cyan-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+       </div>
+       <h3 class="font-semibold text-lg mb-2">SEO Ready</h3>
+       <p class="text-gray-400 text-sm">Built-in optimization to help customers find you on Google</p>
+      </div>
+      <div class="fade-in glass-card rounded-2xl p-6 text-center hover:border-cyan-400/40 transition-all" style="animation-delay: 0.5s;">
+       <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-400/20 to-purple-500/20 flex items-center justify-center mx-auto mb-4">
+        <svg class="w-8 h-8 text-cyan-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+        </svg>
+       </div>
+       <h3 class="font-semibold text-lg mb-2">Easy Updates</h3>
+       <p class="text-gray-400 text-sm">Simple content management so you can update anytime</p>
+      </div>
+     </div>
+     <div class="text-center mt-12"><span class="code-bracket text-lg">&lt;/why-sitespark&gt;</span>
+     </div>
+    </div>
+   </section><!-- How It Works Section -->
+   <section id="process" class="py-24 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16 fade-in"><span class="code-bracket text-lg">&lt;process&gt;</span>
+      <h2 class="text-3xl sm:text-4xl font-bold mt-4 mb-4">How It <span class="gradient-text">Works</span></h2>
+      <p class="text-gray-400 max-w-2xl mx-auto">Four simple steps from consultation to launch</p>
+     </div>
+     <div class="relative"><!-- Connection Line -->
+      <div class="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 via-purple-500 to-cyan-400 transform -translate-y-1/2 z-0"></div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
+       <div class="fade-in text-center">
+        <div class="w-20 h-20 rounded-full bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center mx-auto mb-6 text-2xl font-bold glow-blue">
+         1
+        </div>
+        <h3 class="font-semibold text-lg mb-2">Book Consultation</h3>
+        <p class="text-gray-400 text-sm">Schedule a free call to discuss your vision and goals</p>
+       </div>
+       <div class="fade-in text-center" style="animation-delay: 0.1s;">
+        <div class="w-20 h-20 rounded-full bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center mx-auto mb-6 text-2xl font-bold">
+         2
+        </div>
+        <h3 class="font-semibold text-lg mb-2">Discuss Needs</h3>
+        <p class="text-gray-400 text-sm">We analyze your business requirements and create a plan</p>
+       </div>
+       <div class="fade-in text-center" style="animation-delay: 0.2s;">
+        <div class="w-20 h-20 rounded-full bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center mx-auto mb-6 text-2xl font-bold">
+         3
+        </div>
+        <h3 class="font-semibold text-lg mb-2">Design &amp; Develop</h3>
+        <p class="text-gray-400 text-sm">Our team creates your custom website with your feedback</p>
+       </div>
+       <div class="fade-in text-center" style="animation-delay: 0.3s;">
+        <div class="w-20 h-20 rounded-full bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center mx-auto mb-6 text-2xl font-bold glow-purple">
+         4
+        </div>
+        <h3 class="font-semibold text-lg mb-2">Launch Website</h3>
+        <p class="text-gray-400 text-sm">Go live and start attracting customers online!</p>
+       </div>
+      </div>
+     </div>
+     <div class="text-center mt-16"><a href="#booking" class="btn-primary px-8 py-4 rounded-full font-semibold text-lg inline-block"> Start Your Journey Today </a>
+     </div>
+     <div class="text-center mt-8"><span class="code-bracket text-lg">&lt;/process&gt;</span>
+     </div>
+    </div>
+   </section><!-- Testimonials Section -->
+   <!-- <section id="testimonials" class="py-24 relative bg-gradient-to-b from-transparent via-purple-500/5 to-transparent">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16 fade-in"><span class="code-bracket text-lg">&lt;testimonials&gt;</span>
+      <h2 class="text-3xl sm:text-4xl font-bold mt-4 mb-4">What Our <span class="gradient-text">Clients Say</span></h2>
+      <p class="text-gray-400 max-w-2xl mx-auto">Real stories from businesses we've helped grow online</p>
+     </div>
+     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="fade-in testimonial-card rounded-2xl p-6 border border-purple-500/20">
+       <div class="flex items-center gap-1 mb-4"><span class="text-yellow-400">★</span> <span class="text-yellow-400">★</span> <span class="text-yellow-400">★</span> <span class="text-yellow-400">★</span> <span class="text-yellow-400">★</span>
+       </div>
+       <p class="text-gray-300 mb-6">"SiteSpark built a beautiful website for our cafe and now customers can easily see our menu online. Orders have increased by 40%!"</p>
+       <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-xl">
+         ☕
+        </div>
+        <div>
+         <div class="font-semibold">
+          Maria Santos
+         </div>
+         <div class="text-sm text-gray-500">
+          Café Aroma, Owner
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="fade-in testimonial-card rounded-2xl p-6 border border-purple-500/20" style="animation-delay: 0.1s;">
+       <div class="flex items-center gap-1 mb-4"><span class="text-yellow-400">★</span> <span class="text-yellow-400">★</span> <span class="text-yellow-400">★</span> <span class="text-yellow-400">★</span> <span class="text-yellow-400">★</span>
+       </div>
+       <p class="text-gray-300 mb-6">"The online ordering system they built for our restaurant is amazing. WhatsApp integration makes it so easy for customers to order!"</p>
+       <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-red-400 to-rose-500 flex items-center justify-center text-xl">
+         🍕
+        </div>
+        <div>
+         <div class="font-semibold">
+          James Chen
+         </div>
+         <div class="text-sm text-gray-500">
+          Pizza Palace, Manager
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="fade-in testimonial-card rounded-2xl p-6 border border-purple-500/20" style="animation-delay: 0.2s;">
+       <div class="flex items-center gap-1 mb-4"><span class="text-yellow-400">★</span> <span class="text-yellow-400">★</span> <span class="text-yellow-400">★</span> <span class="text-yellow-400">★</span> <span class="text-yellow-400">★</span>
+       </div>
+       <p class="text-gray-300 mb-6">"Professional, fast, and affordable. Our boutique finally has an online presence that matches our brand quality."</p>
+       <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-xl">
+         👗
+        </div>
+        <div>
+         <div class="font-semibold">
+          Emma Rodriguez
+         </div>
+         <div class="text-sm text-gray-500">
+          Chic Boutique, Founder
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="fade-in testimonial-card rounded-2xl p-6 border border-purple-500/20" style="animation-delay: 0.3s;">
+       <div class="flex items-center gap-1 mb-4"><span class="text-yellow-400">★</span> <span class="text-yellow-400">★</span> <span class="text-yellow-400">★</span> <span class="text-yellow-400">★</span> <span class="text-yellow-400">★</span>
+       </div>
+       <p class="text-gray-300 mb-6">"As a startup, we needed a website that would grow with us. SiteSpark delivered exactly that and more!"</p>
+       <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-violet-400 to-purple-500 flex items-center justify-center text-xl">
+         🚀
+        </div>
+        <div>
+         <div class="font-semibold">
+          Alex Kim
+         </div>
+         <div class="text-sm text-gray-500">
+          TechStart Inc, CEO
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="fade-in testimonial-card rounded-2xl p-6 border border-purple-500/20 md:col-span-2 lg:col-span-2" style="animation-delay: 0.4s;">
+       <div class="flex items-center gap-1 mb-4"><span class="text-yellow-400">★</span> <span class="text-yellow-400">★</span> <span class="text-yellow-400">★</span> <span class="text-yellow-400">★</span> <span class="text-yellow-400">★</span>
+       </div>
+       <p class="text-gray-300 mb-6">"The team at SiteSpark understood our vision perfectly. They created a website that not only looks stunning but actually converts visitors into paying customers. The SEO work they did means we now appear on the first page of Google for local searches. Highly recommended!"</p>
+       <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-xl">
+         🏪
+        </div>
+        <div>
+         <div class="font-semibold">
+          David Park
+         </div>
+         <div class="text-sm text-gray-500">
+          Park's General Store, Owner
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="text-center mt-12"><span class="code-bracket text-lg">&lt;/testimonials&gt;</span>
+     </div>
+    </div>
+   </section> -->
+   <!-- Pricing Section -->
+   <section id="pricing" class="py-24 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16 fade-in"><span class="code-bracket text-lg">&lt;pricing&gt;</span>
+      <h2 class="text-3xl sm:text-4xl font-bold mt-4 mb-4">Simple <span class="gradient-text">Pricing</span></h2>
+      <p class="text-gray-400 max-w-2xl mx-auto">Transparent pricing with no hidden fees</p>
+     </div>
+     <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto"><!-- Basic -->
+      <div class="fade-in glass-card rounded-2xl p-8">
+       <div class="text-center mb-8">
+        <h3 class="text-xl font-semibold mb-2">Basic Website</h3>
+        <p class="text-gray-400 text-sm mb-4">Perfect for getting started</p>
+        <div class="text-4xl font-bold gradient-text">
+         Custom
+        </div>
+        <p class="text-gray-500 text-sm mt-1">Quote based on needs</p>
+       </div>
+       <ul class="space-y-3 mb-8">
+        <li class="flex items-center gap-3 text-sm"><span class="text-cyan-400">✓</span> <span class="text-gray-300">Up to 5 pages</span></li>
+        <li class="flex items-center gap-3 text-sm"><span class="text-cyan-400">✓</span> <span class="text-gray-300">Mobile responsive</span></li>
+        <li class="flex items-center gap-3 text-sm"><span class="text-cyan-400">✓</span> <span class="text-gray-300">Contact form</span></li>
+        <li class="flex items-center gap-3 text-sm"><span class="text-cyan-400">✓</span> <span class="text-gray-300">Basic SEO setup</span></li>
+        <li class="flex items-center gap-3 text-sm"><span class="text-cyan-400">✓</span> <span class="text-gray-300">1 month support</span></li>
+       </ul><a href="#booking" class="btn-secondary w-full py-3 rounded-xl font-semibold text-center block text-cyan-400"> Request Quote </a>
+      </div><!-- Business - Popular -->
+      <div class="fade-in pricing-popular rounded-2xl p-8 relative" style="animation-delay: 0.1s;">
+       <div class="absolute -top-4 left-1/2 transform -translate-x-1/2"><span class="bg-gradient-to-r from-cyan-400 to-purple-500 text-black px-4 py-1 rounded-full text-sm font-semibold"> Most Popular </span>
+       </div>
+       <div class="text-center mb-8">
+        <h3 class="text-xl font-semibold mb-2">Business Website</h3>
+        <p class="text-gray-400 text-sm mb-4">Great for growing businesses</p>
+        <div class="text-4xl font-bold gradient-text">
+         Custom
+        </div>
+        <p class="text-gray-500 text-sm mt-1">Quote based on needs</p>
+       </div>
+       <ul class="space-y-3 mb-8">
+        <li class="flex items-center gap-3 text-sm"><span class="text-cyan-400">✓</span> <span class="text-gray-300">Up to 10 pages</span></li>
+        <li class="flex items-center gap-3 text-sm"><span class="text-cyan-400">✓</span> <span class="text-gray-300">Advanced design</span></li>
+        <li class="flex items-center gap-3 text-sm"><span class="text-cyan-400">✓</span> <span class="text-gray-300">WhatsApp integration</span></li>
+        <li class="flex items-center gap-3 text-sm"><span class="text-cyan-400">✓</span> <span class="text-gray-300">Google Analytics</span></li>
+        <li class="flex items-center gap-3 text-sm"><span class="text-cyan-400">✓</span> <span class="text-gray-300">Full SEO optimization</span></li>
+        <li class="flex items-center gap-3 text-sm"><span class="text-cyan-400">✓</span> <span class="text-gray-300">3 months support</span></li>
+       </ul><a href="#booking" class="btn-primary w-full py-3 rounded-xl font-semibold text-center block"> Request Quote </a>
+      </div><!-- Online Ordering -->
+      <div class="fade-in glass-card rounded-2xl p-8" style="animation-delay: 0.2s;">
+       <div class="text-center mb-8">
+        <h3 class="text-xl font-semibold mb-2">Online Ordering</h3>
+        <p class="text-gray-400 text-sm mb-4">For restaurants &amp; cafes</p>
+        <div class="text-4xl font-bold gradient-text">
+         Custom
+        </div>
+        <p class="text-gray-500 text-sm mt-1">Quote based on needs</p>
+       </div>
+       <ul class="space-y-3 mb-8">
+        <li class="flex items-center gap-3 text-sm"><span class="text-cyan-400">✓</span> <span class="text-gray-300">Full menu system</span></li>
+        <li class="flex items-center gap-3 text-sm"><span class="text-cyan-400">✓</span> <span class="text-gray-300">Online ordering</span></li>
+        <li class="flex items-center gap-3 text-sm"><span class="text-cyan-400">✓</span> <span class="text-gray-300">WhatsApp orders</span></li>
+        <li class="flex items-center gap-3 text-sm"><span class="text-cyan-400">✓</span> <span class="text-gray-300">Menu management</span></li>
+        <li class="flex items-center gap-3 text-sm"><span class="text-cyan-400">✓</span> <span class="text-gray-300">Google Maps integration</span></li>
+        <li class="flex items-center gap-3 text-sm"><span class="text-cyan-400">✓</span> <span class="text-gray-300">6 months support</span></li>
+       </ul><a href="#booking" class="btn-secondary w-full py-3 rounded-xl font-semibold text-center block text-cyan-400"> Request Quote </a>
+      </div>
+     </div>
+     <div class="text-center mt-12"><span class="code-bracket text-lg">&lt;/pricing&gt;</span>
+     </div>
+    </div>
+   </section><!-- Booking Section -->
+   <section id="booking" class="py-24 relative bg-gradient-to-b from-transparent via-cyan-500/5 to-transparent">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-12 fade-in"><span class="code-bracket text-lg">&lt;book-consultation&gt;</span>
+      <h2 class="text-3xl sm:text-4xl font-bold mt-4 mb-4">Book Your <span class="gradient-text">Free Consultation</span></h2>
+      <p class="text-gray-400 max-w-2xl mx-auto">Let's discuss how we can help your business grow online</p>
+     </div>
+     <div class="fade-in glass-card rounded-2xl p-8">
+      <div id="booking-limit-warning" class="limit-warning">
+       ⚠️ We've reached maximum capacity for consultation requests. Please contact us directly via WhatsApp or phone.
+      </div>
+      <form id="booking-form" class="space-y-6">
+       <div class="grid md:grid-cols-2 gap-6">
+        <div><label for="booking-name" class="block text-sm font-medium mb-2">Your Name *</label> <input type="text" id="booking-name" name="name" required class="w-full px-4 py-3 bg-[#0a0a0f] border border-purple-500/30 rounded-xl focus:border-cyan-400 transition-colors" placeholder="Ayesha">
+        </div>
+        <div><label for="booking-business" class="block text-sm font-medium mb-2">Business Name *</label> <input type="text" id="booking-business" name="business" required class="w-full px-4 py-3 bg-[#0a0a0f] border border-purple-500/30 rounded-xl focus:border-cyan-400 transition-colors" placeholder="My Cafe">
+        </div>
+       </div>
+       <div class="grid md:grid-cols-2 gap-6">
+        <div><label for="booking-phone" class="block text-sm font-medium mb-2">Phone Number *</label> <input type="tel" id="booking-phone" name="phone" required class="w-full px-4 py-3 bg-[#0a0a0f] border border-purple-500/30 rounded-xl focus:border-cyan-400 transition-colors" placeholder="+91 9876543210">
+        </div>
+        <div><label for="booking-email" class="block text-sm font-medium mb-2">Email Address *</label> <input type="email" id="booking-email" name="email" required class="w-full px-4 py-3 bg-[#0a0a0f] border border-purple-500/30 rounded-xl focus:border-cyan-400 transition-colors" placeholder="ayesha@gmail.com">
+        </div>
+       </div>
+       <div><label for="booking-message" class="block text-sm font-medium mb-2">Tell us about your project</label> <textarea id="booking-message" name="message" rows="4" class="w-full px-4 py-3 bg-[#0a0a0f] border border-purple-500/30 rounded-xl focus:border-cyan-400 transition-colors resize-none" placeholder="I need a website for my cafe with online menu..."></textarea>
+       </div><button type="submit" id="booking-submit" class="btn-primary w-full py-4 rounded-xl font-semibold text-lg"> Book Free Consultation </button>
+      </form>
+     </div>
+     <div class="text-center mt-8"><span class="code-bracket text-lg">&lt;/book-consultation&gt;</span>
+     </div>
+    </div>
+   </section><!-- Contact Section -->
+   <section id="contact" class="py-24 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-12 fade-in"><span class="code-bracket text-lg">&lt;contact&gt;</span>
+      <h2 class="text-3xl sm:text-4xl font-bold mt-4 mb-4">Get In <span class="gradient-text">Touch</span></h2>
+      <p class="text-gray-400 max-w-2xl mx-auto">Ready to start your project? We're here to help!</p>
+     </div>
+     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6"><a href="#" id="call-btn" class="fade-in glass-card rounded-2xl p-6 text-center hover:border-cyan-400/40 transition-all group">
+       <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-400/20 to-purple-500/20 flex items-center justify-center mx-auto mb-4 group-hover:glow-blue transition-all">
+        <svg class="w-7 h-7 text-cyan-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+        </svg>
+       </div><h3 class="font-semibold mb-1">Call Us</h3><p id="display-phone" class="text-cyan-400 text-sm">+91 9150501086</p></a> <a href="#" id="whatsapp-btn" class="fade-in glass-card rounded-2xl p-6 text-center hover:border-green-400/40 transition-all group" style="animation-delay: 0.1s;">
+       <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-green-400/20 to-emerald-500/20 flex items-center justify-center mx-auto mb-4 group-hover:shadow-lg group-hover:shadow-green-500/20 transition-all">
+        <svg class="w-7 h-7 text-green-400" fill="currentColor" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+       </div><h3 class="font-semibold mb-1">WhatsApp</h3><p id="display-whatsapp" class="text-green-400 text-sm">+91 9150501086</p></a> <a href="#" id="email-btn" class="fade-in glass-card rounded-2xl p-6 text-center hover:border-purple-400/40 transition-all group" style="animation-delay: 0.2s;">
+       <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-400/20 to-pink-500/20 flex items-center justify-center mx-auto mb-4 group-hover:shadow-lg group-hover:shadow-purple-500/20 transition-all">
+        <svg class="w-7 h-7 text-purple-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+       </div><h3 class="font-semibold mb-1">Email</h3><p id="display-email" class="text-purple-400 text-sm">effathjansyedjalal@gmail.com</p></a> <a href="#" class="fade-in glass-card rounded-2xl p-6 text-center hover:border-cyan-400/40 transition-all group" style="animation-delay: 0.3s;" target="_blank" rel="noopener noreferrer">
+       <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-red-400/20 to-orange-500/20 flex items-center justify-center mx-auto mb-4 group-hover:shadow-lg group-hover:shadow-red-500/20 transition-all">
+        <svg class="w-7 h-7 text-red-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+       </div><h3 class="font-semibold mb-1">Location</h3><p class="text-red-400 text-sm">View on Maps</p></a>
+     </div><!-- Social Links -->
+     <div class="flex justify-center gap-4 mt-12 fade-in" style="animation-delay: 0.4s;"><a href="#" class="w-12 h-12 rounded-xl glass-card flex items-center justify-center hover:border-cyan-400/40 transition-all" target="_blank" rel="noopener noreferrer">
+       <svg class="w-5 h-5 text-gray-400 hover:text-cyan-400" fill="currentColor" viewbox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+       </svg></a> <a href="#" class="w-12 h-12 rounded-xl glass-card flex items-center justify-center hover:border-cyan-400/40 transition-all" target="_blank" rel="noopener noreferrer">
+       <svg class="w-5 h-5 text-gray-400 hover:text-cyan-400" fill="currentColor" viewbox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z" />
+       </svg></a> <a href="https://www.instagram.com/site._.spark/" class="w-12 h-12 rounded-xl glass-card flex items-center justify-center hover:border-cyan-400/40 transition-all" target="_blank" rel="noopener noreferrer">
+       <svg class="w-5 h-5 text-gray-400 hover:text-cyan-400" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+       </svg></a> <a href="https://www.linkedin.com/in/sitespark/" class="w-12 h-12 rounded-xl glass-card flex items-center justify-center hover:border-cyan-400/40 transition-all" target="_blank" rel="noopener noreferrer">
+       <svg class="w-5 h-5 text-gray-400 hover:text-cyan-400" fill="currentColor" viewbox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667h-3.554v-11.452h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zm-15.11-13.019c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019h-3.564v-11.452h3.564v11.452zm15.106-20.452h-20.454c-.979 0-1.771.774-1.771 1.729v20.542c0 .956.792 1.729 1.771 1.729h20.451c.978 0 1.778-.773 1.778-1.729v-20.542c0-.955-.8-1.729-1.778-1.729z" />
+       </svg></a>
+     </div>
+     <div class="text-center mt-12"><span class="code-bracket text-lg">&lt;/contact&gt;</span>
+     </div>
+    </div>
+   </section><!-- Footer -->
+   <footer class="py-12 border-t border-purple-500/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="grid md:grid-cols-4 gap-8 mb-8">
+      <div class="md:col-span-2"><a href="#hero" class="flex items-center gap-2 mb-4">
+        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center"><span class="mono text-lg font-bold">&lt;/&gt;</span>
+        </div><span class="text-xl font-bold">Site<span class="gradient-text">Spark</span></span> </a>
+       <p class="text-gray-400 text-sm mb-4 max-w-sm">Building modern websites that bring customers to your business. Your success is our code.</p>
+       <div class="flex items-center gap-2 text-sm text-gray-500">
+        <svg class="w-4 h-4 text-green-400" fill="currentColor" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg><span id="footer-whatsapp">+91 9150501086</span>
+       </div>
+      </div>
+      <div>
+       <h4 class="font-semibold mb-4">Services</h4>
+       <ul class="space-y-2 text-sm text-gray-400">
+        <li><a href="#services" class="hover:text-cyan-400 transition-colors">Website Design</a></li>
+        <li><a href="#services" class="hover:text-cyan-400 transition-colors">Business Websites</a></li>
+        <li><a href="#services" class="hover:text-cyan-400 transition-colors">E-commerce</a></li>
+        <li><a href="#services" class="hover:text-cyan-400 transition-colors">Website Maintenance</a></li>
+       </ul>
+      </div>
+      <div>
+       <h4 class="font-semibold mb-4">Quick Links</h4>
+       <ul class="space-y-2 text-sm text-gray-400">
+        <li><a href="#about" class="hover:text-cyan-400 transition-colors">About Us</a></li>
+        <li><a href="#portfolio" class="hover:text-cyan-400 transition-colors">Portfolio</a></li>
+        <li><a href="#pricing" class="hover:text-cyan-400 transition-colors">Pricing</a></li>
+        <li><a href="#booking" class="hover:text-cyan-400 transition-colors">Contact</a></li>
+       </ul>
+      </div>
+     </div>
+     <div class="border-t border-purple-500/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-gray-500 text-sm">© 2024 SiteSpark. All rights reserved.</p>
+      <p class="text-gray-600 text-sm mono">&lt;Built with 💜 by SiteSpark/&gt;</p>
+     </div>
+    </div>
+   </footer><!-- Floating WhatsApp Button --> <a href="#" id="floating-whatsapp" class="fixed bottom-6 right-6 w-16 h-16 bg-green-500 rounded-full flex items-center justify-center shadow-lg shadow-green-500/30 hover:scale-110 transition-transform z-50 floating-btn" target="_blank" rel="noopener noreferrer">
+    <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg></a> <!-- Toast Notification -->
+   <div id="toast" class="toast"></div>
+  </div>
+  <script>
+    // Default configuration
+    const defaultConfig = {
+      hero_title: 'We Build Websites That Bring Customers to Your Business',
+      hero_subtitle: 'SiteSpark helps cafes, restaurants, shops, and startups establish a powerful online presence with modern, conversion-focused websites that drive real business results.',
+      about_title: 'Empowering Local Businesses with Digital Excellence',
+      phone_number: '+91 9150501086',
+      whatsapp_number: '+91 9150501086',
+      email_address: 'effathjansyedjalal@gmail.com',
+      background_color: '#0a0a0f',
+      surface_color: '#12121a',
+      text_color: '#ffffff',
+      primary_action_color: '#00d4ff',
+      secondary_action_color: '#a855f7'
+    };
+
+    let config = { ...defaultConfig };
+    let recordCount = 0;
+
+    // Data Handler for consultation bookings
+    const dataHandler = {
+      onDataChanged(data) {
+        recordCount = data.length;
+        // Update booking limit warning if needed
+        const limitWarning = document.getElementById('booking-limit-warning');
+        if (limitWarning) {
+          if (recordCount >= 999) {
+            limitWarning.classList.add('show');
+          } else {
+            limitWarning.classList.remove('show');
+          }
+        }
+      }
+    };
+
+    // Initialize Element SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (newConfig) => {
+          config = { ...defaultConfig, ...newConfig };
+          
+          // Update hero section
+          const heroTitle = document.getElementById('hero-title');
+          if (heroTitle) {
+            heroTitle.innerHTML = (config.hero_title || defaultConfig.hero_title).replace(
+              /(Bring Customers)/g, 
+              '<span class="gradient-text">$1</span>'
+            );
+          }
+          
+          const heroSubtitle = document.getElementById('hero-subtitle');
+          if (heroSubtitle) {
+            heroSubtitle.textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+          }
+          
+          // Update about section
+          const aboutTitle = document.getElementById('about-title');
+          if (aboutTitle) {
+            aboutTitle.innerHTML = (config.about_title || defaultConfig.about_title).replace(
+              /(Digital Excellence)/g,
+              '<span class="gradient-text">$1</span>'
+            );
+          }
+          
+          // Update contact info
+          const phone = config.phone_number || defaultConfig.phone_number;
+          const whatsapp = config.whatsapp_number || defaultConfig.whatsapp_number;
+          const email = config.email_address || defaultConfig.email_address;
+          
+          document.getElementById('display-phone').textContent = phone;
+          document.getElementById('display-whatsapp').textContent = whatsapp;
+          document.getElementById('display-email').textContent = email;
+          document.getElementById('footer-whatsapp').textContent = whatsapp;
+          
+          // Update links
+          document.getElementById('call-btn').href = `tel:${phone.replace(/\s/g, '')}`;
+          document.getElementById('whatsapp-btn').href = `https://wa.me/${whatsapp.replace(/[^0-9]/g, '')}`;
+          document.getElementById('email-btn').href = `mailto:${email}`;
+          document.getElementById('floating-whatsapp').href = `https://wa.me/${whatsapp.replace(/[^0-9]/g, '')}`;
+        },
+        mapToCapabilities: (cfg) => ({
+          recolorables: [
+            {
+              get: () => cfg.background_color || defaultConfig.background_color,
+              set: (value) => {
+                cfg.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            },
+            {
+              get: () => cfg.surface_color || defaultConfig.surface_color,
+              set: (value) => {
+                cfg.surface_color = value;
+                window.elementSdk.setConfig({ surface_color: value });
+              }
+            },
+            {
+              get: () => cfg.text_color || defaultConfig.text_color,
+              set: (value) => {
+                cfg.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => cfg.primary_action_color || defaultConfig.primary_action_color,
+              set: (value) => {
+                cfg.primary_action_color = value;
+                window.elementSdk.setConfig({ primary_action_color: value });
+              }
+            },
+            {
+              get: () => cfg.secondary_action_color || defaultConfig.secondary_action_color,
+              set: (value) => {
+                cfg.secondary_action_color = value;
+                window.elementSdk.setConfig({ secondary_action_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (cfg) => new Map([
+          ['hero_title', cfg.hero_title || defaultConfig.hero_title],
+          ['hero_subtitle', cfg.hero_subtitle || defaultConfig.hero_subtitle],
+          ['about_title', cfg.about_title || defaultConfig.about_title],
+          ['phone_number', cfg.phone_number || defaultConfig.phone_number],
+          ['whatsapp_number', cfg.whatsapp_number || defaultConfig.whatsapp_number],
+          ['email_address', cfg.email_address || defaultConfig.email_address]
+        ])
+      });
+    }
+
+    // Initialize Data SDK
+    async function initDataSdk() {
+      if (window.dataSdk) {
+        const result = await window.dataSdk.init(dataHandler);
+        if (!result.isOk) {
+          console.error('Failed to initialize data SDK');
+        }
+      }
+    }
+    initDataSdk();
+
+    // Initialize EmailJS
+    if (window.emailjs) {
+      emailjs.init('YOUR_PUBLIC_KEY_HERE'); // You'll set this in Canva settings
+    }
+
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu when clicking a link
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('nav-scrolled');
+      } else {
+        navbar.classList.remove('nav-scrolled');
+      }
+    });
+
+    // Fade-in animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Toast notification function
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    // Booking form submission
+    const bookingForm = document.getElementById('booking-form');
+    const bookingSubmit = document.getElementById('booking-submit');
+    
+    bookingForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      if (recordCount >= 999) {
+        showToast('Maximum capacity reached. Please contact us directly.');
+        return;
+      }
+      
+      const formData = new FormData(bookingForm);
+      const name = formData.get('name');
+      const business = formData.get('business');
+      const phone = formData.get('phone');
+      const email = formData.get('email');
+      const message = formData.get('message') || '';
+      const whatsappNumber = config.whatsapp_number || defaultConfig.whatsapp_number;
+      const emailAddress = config.email_address || defaultConfig.email_address;
+      
+      // Show loading state
+      bookingSubmit.disabled = true;
+      bookingSubmit.textContent = 'Submitting...';
+      
+      if (window.dataSdk) {
+        const result = await window.dataSdk.create({
+          name,
+          business_name: business,
+          phone,
+          email,
+          message,
+          contact_method: 'whatsapp_and_email',
+          created_at: new Date().toISOString(),
+          type: 'consultation'
+        });
+        
+        if (result.isOk) {
+          // Send email notification
+          if (window.emailjs) {
+            try {
+              await emailjs.send('YOUR_SERVICE_ID_HERE', 'YOUR_TEMPLATE_ID_HERE', {
+                to_email: emailAddress,
+                client_name: name,
+                client_business: business,
+                client_phone: phone,
+                client_email: email,
+                client_message: message,
+                submission_date: new Date().toLocaleDateString()
+              });
+            } catch (err) {
+              console.error('Email send failed:', err);
+            }
+          }
+          
+          // Send WhatsApp message
+          const whatsappMsg = `Hello! I'm ${name} from ${business}. I'm interested in a website consultation. Phone: ${phone}, Email: ${email}. Message: ${message}`;
+          const whatsappLink = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMsg)}`;
+          window.open(whatsappLink, '_blank');
+          
+          showToast('✓ Consultation booked! Email sent + WhatsApp chat opened.');
+          bookingForm.reset();
+        } else {
+          showToast('Something went wrong. Please try again.');
+        }
+      } else {
+        // Fallback: open WhatsApp
+        const whatsappMsg = `Hello! I'm ${name} from ${business}. I'm interested in a website consultation. Phone: ${phone}, Email: ${email}. Message: ${message}`;
+        const whatsappLink = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMsg)}`;
+        window.open(whatsappLink, '_blank');
+        
+        showToast('Consultation request sent! Check your WhatsApp.');
+        bookingForm.reset();
+      }
+      
+      // Reset button state
+      bookingSubmit.disabled = false;
+      bookingSubmit.textContent = 'Book Free Consultation';
+    });
+
+    // Initialize contact links with default values
+    document.getElementById('call-btn').href = `tel:${defaultConfig.phone_number.replace(/\s/g, '')}`;
+    document.getElementById('whatsapp-btn').href = `https://wa.me/${defaultConfig.whatsapp_number.replace(/[^0-9]/g, '')}`;
+    document.getElementById('email-btn').href = `mailto:${defaultConfig.email_address}`;
+    document.getElementById('floating-whatsapp').href = `https://wa.me/${defaultConfig.whatsapp_number.replace(/[^0-9]/g, '')}`;
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d9ae522c6b48587',t:'MTc3MzA2Nzg1OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
